@@ -1,0 +1,35 @@
+.bg-animation {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 1920px;
+  height: 1080px;
+  z-index: -1;
+  transform: translateX(-50%);
+}
+
+.bg-animation1 {
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  width: 1920px;
+  height: 1080px;
+  z-index: -2;
+  transform: translateX(-50%);
+}
+
+.bg-animation2 {
+  position: absolute;
+  bottom: 0;
+  z-index: -1;
+  width: 1920px;
+  height: 1080px;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .bg-animation,.bg-animation1,.bg-animation2 {
+    height: 100vh;
+    bottom: 0;
+  }
+}

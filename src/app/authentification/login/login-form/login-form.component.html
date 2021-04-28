@@ -1,0 +1,106 @@
+<div class="form">
+  <div class="login">
+    <form (ngSubmit)="onSubmit(data)" [formGroup]="data" name="contact">
+
+
+      <div [class.hidden]="this.twoFAState">
+        <div class="form-field">
+          <h1 class="title">Login</h1>
+          <div *ngIf="this.stuLogin" class="stu-icon">
+            <mat-icon [inline]="true" svgIcon="stuLogo"></mat-icon>
+          </div>
+        </div>
+        <div class="form-field login-field">
+          <mat-form-field appearance="fill">
+            <mat-label *ngIf="!this.stuLogin">Email</mat-label>
+            <mat-label *ngIf="this.stuLogin">Username</mat-label>
+            <label>
+              <input formControlName="email"
+                     matInput
+                     name="email" required type="email"/>
+            </label>
+            <mat-error *ngIf="this.emailCheck===false&&!this.stuLogin">
+              Could’t find a account associated with this email
+            </mat-error>
+            <mat-error *ngIf="!data.hasError('notSTU')&&this.stuLogin&&this.notSTU">
+              Could’t find a STU account associated with this name
+            </mat-error>
+            <mat-error *ngIf="!data.hasError('alreadyReg')&&this.stuLogin&&this.alreadyReg">
+              Account is already registered by another service
+            </mat-error>
+            <mat-error *ngIf="!data.hasError('email')&&!this.stuLogin">
+              Enter valid email ex:user@mail.com
+            </mat-error>
+            <mat-error *ngIf="this.stuLogin&&this.emailCheck===true">
+              Minimum 4 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-field  login-field">
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <label>
+              <input (input)="resetError()" formControlName="password"
+                     matInput
+                     name="password" required type="password"/>
+            </label>
+            <mat-error *ngIf="this.wrongPassword">
+              Wrong password
+            </mat-error>
+            <mat-error *ngIf="!data.hasError('minlength')&&!this.wrongPassword">
+              Minimum 6 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="submit-field">
+          <button class="submit-button submit" color="primary" mat-raised-button type="submit">Login</button>
+          <button [routerLink]="'/register'" class="submit-button" color="secondary" mat-raised-button type="button">
+            Register
+          </button>
+        </div>
+      </div>
+      <div [class.hidden]="!this.twoFAState">
+        <div class="header">
+          <h1 class="title">2FA</h1>
+          <button (click)="returnLogin()" aria-label="return icon" class="return" color="primary" mat-fab>
+            <mat-icon>keyboard_return</mat-icon>
+          </button>
+        </div>
+
+        <div class="form">
+          <div class="form-field  login-field">
+            <mat-form-field appearance="fill">
+              <mat-label>Authentication code</mat-label>
+              <label>
+                <input (input)="checkCode($event)"
+                       formControlName="authCode" matInput
+                       name="authCode" type="number"/>
+              </label>
+              <mat-hint>Code from Google Authenticator</mat-hint>
+              <mat-error *ngIf="!this.codeCheck">
+                Enter code from Google Authentication
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-field login-alternative">
+          <button (click)="loginCustom()" class="login-google" color="primary" mat-button mat-fab>
+            <mat-icon>send</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </form>
+    <div [class.hidden]="this.twoFAState" class="form-field login-alternative">
+      <button (click)="signInWithGoogle()" class="login-google" color="primary" mat-button mat-fab>
+        <mat-icon svgIcon="googleLogo"></mat-icon>
+      </button>
+      <button (click)="changeFormToSTU()" class="login-stu" color="primary" mat-button mat-fab>
+        <mat-icon *ngIf="!this.stuLogin" [inline]="true" svgIcon="stuLogo"></mat-icon>
+        <mat-icon *ngIf="this.stuLogin">keyboard_return</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+

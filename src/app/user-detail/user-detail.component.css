@@ -1,0 +1,83 @@
+.user {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.user-card {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(3px);
+  max-width: 400px;
+  border-radius: 12px;
+}
+
+.logout {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.stats table {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  backdrop-filter: blur(3px);
+  border-radius: 12px;
+  width: 200px;
+}
+
+#userStats {
+  margin-right: 50px;
+  margin-left: 50px;
+}
+
+#allStats th {
+  text-align: center;
+}
+
+#allStats th:first-child {
+  border-top-left-radius: 12px;
+}
+
+#allStats th:nth-child(2) {
+  border-top-right-radius: 12px;
+}
+
+#userStats th {
+  text-align: center;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+#allStats tr:last-child td:first-child {
+  border-bottom-left-radius: 12px;
+}
+
+#allStats tr:last-child td:nth-child(2) {
+  border-bottom-right-radius: 12px;
+}
+
+#userStats tr:last-child td:first-child {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+@media only screen and (max-width: 770px) {
+  .user {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #userStats {
+    margin: 0 10px 0 0;
+  }
+
+  .stats {
+    margin-top: 10px;
+  }
+}

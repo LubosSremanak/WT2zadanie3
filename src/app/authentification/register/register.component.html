@@ -1,0 +1,105 @@
+<div class="form">
+  <div class="register">
+
+    <form (ngSubmit)="onSubmit(data)" [formGroup]="data" name="contact">
+      <div class="header">
+        <h1 class="title">Register</h1>
+        <button aria-label="return icon" class="return" color="primary" mat-fab routerLink="/">
+          <mat-icon>keyboard_return</mat-icon>
+        </button>
+      </div>
+
+      <div class="form-field register-field">
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <label>
+            <input formControlName="name" matInput name="name" required type="text"/>
+          </label>
+          <mat-error>
+            Enter name
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Surname</mat-label>
+          <label>
+            <input formControlName="surname"
+                   matInput
+                   name="surname" required type="text"/>
+          </label>
+          <mat-error>
+            Enter surname
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-field register-field">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <label>
+            <input (input)="checkEmail($event)" formControlName="email"
+                   matInput
+                   name="email" required type="email"/>
+          </label>
+          <mat-error *ngIf="this.emailCheck">
+            Email is already in use
+          </mat-error>
+          <mat-error *ngIf="!data.hasError('email')">
+            Enter valid email ex:user@mail.com
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-field register-field">
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <label>
+            <input formControlName="password"
+                   matInput
+                   name="password" required type="password"/>
+          </label>
+          <mat-error>
+            Min 6 characters
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Repeat password</mat-label>
+          <label>
+            <input formControlName="passwordRepeat"
+                   matInput
+                   name="passwordRepeat" required type="password"/>
+          </label>
+          <mat-error>
+            Confirm password
+          </mat-error>
+          <mat-error *ngIf="data.hasError('notSame')">
+            Passwords are not match
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-field register-field">
+        <div class="code">
+          <span class="code-string">{{this.twoFACode}}</span>
+          <qrcode [colorDark]="'#6176e3'" [errorCorrectionLevel]="'M'" [qrdata]="this.qrCode" [width]="256"
+                  class="qr-code"></qrcode>
+        </div>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Authentication code</mat-label>
+          <label>
+            <input (input)="checkCode($event)" formControlName="authCode"
+                   matInput
+                   name="authCode" required type="number"/>
+          </label>
+          <mat-hint>Code from Google Authenticator</mat-hint>
+          <mat-error *ngIf="!this.codeCheck">
+            Enter code from Google Authentication
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="submit-field">
+        <button class="submit-button" color="primary" mat-raised-button type="submit">Register</button>
+      </div>
+    </form>
+  </div>
+</div>
+

@@ -1,0 +1,11 @@
+<router-outlet></router-outlet>
+<app-footer></app-footer>
+<app-lottie *ngIf="isMobile()" (isLoaded)="mobileAnimation()" [loop]="false" [autoPlay]="false"
+            [path]="'assets/animations/bg1.json'" [lottieId]="'bgMobile'"
+            class="bg-animation1"></app-lottie>
+<app-lottie (isLoaded)="mainAnimation()" *ngIf="!isMobile()" [loop]="false" [autoPlay]="false"
+            [path]="'assets/animations/bg1c.json'" [lottieId]="'bgMain'"
+            class="bg-animation1"></app-lottie>
+<app-lottie (isLoaded)="birdsAnimation()" [lottieId]="'bgBirds'" [loop]="true" [autoPlay]="true"
+            [path]="'assets/animations/birds.json'" class="bg-animation2"></app-lottie>
+
